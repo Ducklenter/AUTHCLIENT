@@ -19,6 +19,7 @@ class AuthClient:
             "email": email, "password": password
         })
         r.raise_for_status()
+        print("Login response:", r.json())
         data = r.json()
         self._access_token = data["access_token"]
         self._refresh_token = data["refresh_token"]
