@@ -57,7 +57,7 @@ class AuthClient:
     def create(self, data: dict):
         r = requests.post(
             f"{self._base_url}/progress/{self._user_id}",
-            json={"data", data},
+            json={"data": data},
             headers={"Authorization": f"Bearer {self._access_token}"}
         )
         r.raise_for_status()
