@@ -29,7 +29,7 @@ class AuthClient:
 
     def save(self, data: dict):
         r = requests.patch(f"{self._base_url}/progress/{self._user_id}",
-            json={"data": data},
+            json=data,
             headers={"Authorization": f"Bearer {self._access_token}"}
         )
         r.raise_for_status()
@@ -39,7 +39,7 @@ class AuthClient:
             headers={"Authorization": f"Bearer {self._access_token}"}
         )
         r.raise_for_status()
-        return r.json()["data"]
+        return r.json()
 
     def logout(self):
         requests.post(f"{self._base_url}/auth/logout", json={
@@ -51,7 +51,7 @@ class AuthClient:
     def create(self, data: dict):
         r = requests.post(
             f"{self._base_url}/progress/{self._user_id}",
-            json={"data": data},
+            json=data,
             headers={"Authorization": f"Bearer {self._access_token}"}
         )
         r.raise_for_status()
