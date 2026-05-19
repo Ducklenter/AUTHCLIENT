@@ -18,6 +18,6 @@
     auth.load() # after the user has logged in this will have all the user's data
     
     playerInfo = auth.load()
-    print(playerInfo["level"]) # prints the player's level
+    print(playerInfo["level"]) # prints the player's level (if it exists)
 
     auth.logout() # logs out of the program, run this when the program terminates
