@@ -48,3 +48,10 @@ class AuthClient:
         self._access_token = None
         self._refresh_token = None
         self._user_id = None
+    def create(self, data: dict):
+        r = requests.post(
+            f"{self._base_url}/progress/{self._user_id}",
+            json={"data": data},
+            headers={"Authorization": f"Bearer {self._access_token}"}
+        )
+        r.raise_for_status()
