@@ -1,4 +1,6 @@
 import requests
+import base64
+import json
 
 class AuthClient:
     def __init__(self, base_url: str):
@@ -19,11 +21,14 @@ class AuthClient:
             "email": email, "password": password
         })
         r.raise_for_status()
-        print("Login response:", r.json())
+        #print("Login response:", r.json())
         data = r.json()
         self._access_token = data["access_token"]
         self._refresh_token = data["refresh_token"]
-        self._user_id = self._user_id or data.get("user_id")
+        
+        payload = self._access_token.split(".")[1]
+        payload += "=" * (4 - len(payload) % 4)
+        self._user_id = json.loads(base64.b64decode(payload))["sub"]
 
         if not self._user_id:
             self._user_id = data.get("user_id")
