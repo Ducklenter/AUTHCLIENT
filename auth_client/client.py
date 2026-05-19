@@ -24,6 +24,9 @@ class AuthClient:
         self._refresh_token = data["refresh_token"]
         self._user_id = self._user_id or data.get("user_id")
 
+        if not self._user_id:
+            self._user_id = data.get("user_id")
+
     def save(self, data: dict):
         r = requests.patch(f"{self._base_url}/progress/{self._user_id}",
             json={"data": data},

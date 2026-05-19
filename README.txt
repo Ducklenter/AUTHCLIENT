@@ -1,6 +1,7 @@
 1. Make sure the auth service is running
 
 1.5 pip install setuptools in setup.py because python doesn't include it by default anymore
+
 2. Install the client library:
     pip install git+https://github.com/Ducklenter/AUTHCLIENT.git
 
