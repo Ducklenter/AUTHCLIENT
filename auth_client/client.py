@@ -39,6 +39,13 @@ class AuthClient:
             headers={"Authorization": f"Bearer {self._access_token}"}
         )
         r.raise_for_status()
+                
+        if r.status_code == 404:
+            r = requests.post(f"{self._base_url}/progress/{self._user_id}",
+                json={"data": data},
+                headers={"Authorization": f"Bearer {self._access_token}"}
+            )
+        r.raise_for_status()
 
     def load(self) -> dict:
         r = requests.get(f"{self._base_url}/progress/{self._user_id}",
